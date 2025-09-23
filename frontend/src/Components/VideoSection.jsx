@@ -36,8 +36,8 @@ import Error from "./Error";
 import { useSelector } from "react-redux";
 
 function VideoSection() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app";
-  // const backendURL = "http://localhost:3000";
+  // const backendURL = "https://youtube-clone-mern-backend.vercel.app";
+  const backendURL = "http://localhost:3000";
   const { id } = useParams();
   const [videoData, setVideoData] = useState(null);
   const [channelName, setChannelName] = useState();
@@ -733,7 +733,7 @@ function VideoSection() {
           }
         );
         const { message, likes } = await response.json();
-        if ((message = "Comment liked successfully")) {
+        if ((message === "Comment liked successfully")) {
           setCommentLikes(likes);
         } else {
           setCommentLikes(likes);
@@ -1019,7 +1019,7 @@ function VideoSection() {
     return formattedDescription.replace(/\n/g, "<br>");
   };
 
-  if (user?.email !== usermail && visibility === "Private") {
+  if (user?.email !== usermail && visibility === "Public") {
     return (
       <>
         <Error />
@@ -3188,7 +3188,7 @@ function VideoSection() {
                     ) : (
                       ""
                     )}
-                    {element.playlist_privacy === "Private" ? (
+                    {element.playlist_privacy === "Public" ? (
                       <LockOutlinedIcon
                         className="new-privacy"
                         fontSize="medium"
@@ -3297,7 +3297,7 @@ function VideoSection() {
                 theme ? "second-privacy" : "second-privacy feature-light"
               }
               onClick={() => {
-                setPrivacy("Private");
+                setPrivacy("public");
                 setprivacyClicked(false);
               }}
             >
@@ -3306,7 +3306,7 @@ function VideoSection() {
                 style={{ color: theme ? "white" : "black" }}
               />
               <div className="right-privacy">
-                <p>Private</p>
+                <p>Public</p>
                 <p className={theme ? "" : "text-light-mode2"}>
                   Only you can view
                 </p>

@@ -16,6 +16,7 @@ import Content from "./Components/Studio/Content";
 import VideoDetails from "./Components/Studio/VideoDetails";
 import Comments from "./Components/Studio/Comments";
 import VideoComments from "./Components/Studio/VideoComments";
+import HomeVideos from "./Components/HomeVideos"; // <- NEW
 import { ToastContainer } from "react-toastify";
 import { Helmet } from "react-helmet";
 import ytLogo from "./img/icon.png";
@@ -27,7 +28,6 @@ import { useEffect } from "react";
 function App() {
   const User = useSelector((state) => state.user.user);
   const { user } = User;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,8 +53,8 @@ function App() {
           <link rel="icon" type="image/x-icon" href={ytLogo} />
         </Helmet>
         <Routes>
-          <Route path="/" element={<Browse />} />
-          <Route path="/home" element={<Browse />} />
+          <Route path="/" element={<HomeVideos />} /> {/* Home with demo videos */}
+          <Route path="/home" element={<HomeVideos />} />
           <Route
             path="/studio"
             element={user ? <Studio /> : <Error />}
@@ -87,7 +87,6 @@ function App() {
             path="/watchlater"
             element={user ? <WatchLater /> : <Error />}
           />
-
           <Route
             path="/library"
             element={user ? <Library /> : <Error />}

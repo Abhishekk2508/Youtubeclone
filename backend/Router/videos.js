@@ -100,64 +100,40 @@ Videos.post("/publish", async (req, res) => {
 
 Videos.get("/getvideos", async (req, res) => {
   try {
-    const videos = await videodata.find({});
-    const videoURLs = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.videoURL)
-    );
-    const videoData = videos.flatMap((video) => video);
-    const thumbnailURLs = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.thumbnailURL)
-    );
-    const titles = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.Title)
-    );
-    const Uploader = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.uploader)
-    );
-    const Duration = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.videoLength)
-    );
-    const Profile = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.ChannelProfile)
-    );
-    const videoID = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.id)
-    );
-    const comments = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.comments)
-    );
-    const views = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.views)
-    );
-    const uploadDate = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.uploaded_date)
-    );
-    const Likes = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.likes)
-    );
-    const Visibility = videos.flatMap((video) =>
-      video.VideoData.map((data) => data.visibility)
+    // Sab users ke videos fetch karo
+    const usersWithVideos = await videodata.find({});
+
+    // Sirf Public videos ko flatten karo
+    const allVideos = usersWithVideos.flatMap(user =>
+      user.VideoData.filter(video => video.visibility === "Public")
+        .map(video => ({
+          videoID: video._id,
+          videoURL: video.videoURL,
+          thumbnailURL: video.thumbnailURL,
+          Title: video.Title,
+          Description: video.Description,
+          Tags: video.Tags,
+          videoLength: video.videoLength,
+          views: video.views,
+          uploaded_date: video.uploaded_date,
+          likes: video.likes,
+          comments: video.comments,
+          uploader: video.uploader,
+          ChannelProfile: video.ChannelProfile,
+          visibility: video.visibility,
+        }))
     );
 
-    res.json({
-      thumbnailURLs,
-      videoURLs,
-      titles,
-      Uploader,
-      Profile,
-      Duration,
-      videoID,
-      comments,
-      views,
-      Likes,
-      uploadDate,
-      Visibility,
-      videoData,
-    });
+    // Sort by uploaded_date descending (recent first)
+    allVideos.sort((a, b) => new Date(b.uploaded_date) - new Date(a.uploaded_date));
+
+    res.status(200).json(allVideos);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "An error occurred" });
   }
 });
+
 
 Videos.get("/getuservideos/:email", async (req, res) => {
   try {

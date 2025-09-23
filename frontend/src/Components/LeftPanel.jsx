@@ -518,7 +518,7 @@ function LeftPanel() {
           <hr className={theme ? "seperate" : "seperate-light"} />
           <Tooltip
             TransitionComponent={Zoom}
-            title="Made with 💖 by Shubhojeet"
+            title="Made with Teejaysoft"
             placement="bottom"
           >
             <div className="developer">
@@ -527,11 +527,11 @@ function LeftPanel() {
                 style={{ color: theme ? "white" : "black" }}
               />
               <a
-                href="https://github.com/shubho0908"
+                href="http://github.com/Abhishekk2508"
                 target="_blank"
                 rel="noreferrer"
               >
-                Shubhojeet Bera 🚀
+                Abhishekk
               </a>
             </div>
           </Tooltip>
@@ -1344,7 +1344,7 @@ function LeftPanel() {
             <hr className={theme ? "seperate" : "seperate-light"} />
             <Tooltip
               TransitionComponent={Zoom}
-              title="Made with 💖 by Shubhojeet"
+              title="Made with Teejaysoft"
               placement="bottom"
             >
               <div className="developer">
@@ -1353,11 +1353,11 @@ function LeftPanel() {
                   style={{ color: theme ? "white" : "black" }}
                 />
                 <a
-                  href="https://github.com/shubho0908"
+                  href="https://github.com/Abhishekk2508"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Shubhojeet Bera 🚀
+                  Abhishekk 🚀
                 </a>
               </div>
             </Tooltip>
