@@ -37,7 +37,7 @@ Or watch the demo [here.](https://youtu.be/CJEoNpLgRRw?si=8F2vfGwuBO03jRsH)
 
 
 ## Configuration
-1. Create a `.env` file in the root directory of your project.
+1. Create a  `.env` file in the root directory of your project.
 2. Add necessary environment variables to the `.env` file, such as database connection URLs, API keys, or other sensitive data.
 3. Add your own MongoDB Atlas URI in the datbase file inside the backend folder.
 
